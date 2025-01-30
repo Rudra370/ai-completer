@@ -65,7 +65,9 @@ export class GeminiSingleton {
         if (!GeminiSingleton.instance) {
             const apiKey = localStorage.getItem(GeminiSingleton.localStorageKey);
             if (apiKey === null) {
-                window.location.href = "/?settings=1&tab=1";
+                if (!window.location.search.includes("settings=1")) {
+                    window.location.search = "settings=1&tab=1";
+                }
                 return null;
             }
             GeminiSingleton.instance = new GeminiSingleton(apiKey);
